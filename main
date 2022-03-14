@@ -1,0 +1,29 @@
+<html>
+<body>
+<h2>注音翻譯機</h2>
+<form>
+
+  <input type=text name=text1 value="" size=50>
+  <input type=button value="翻譯" onClick="this.form.text2.value = decode(this.form.text1.value)"><br>
+  <input type=text name=text2 size=50>
+
+
+<script>
+
+function decode(str){
+
+  dict = {'1': "ㄅ", '2': "ㄉ", '3': "ˇ", '4': "ˋ", '5': "ㄓ", '6': "ˊ", '7': "˙", '8':"ㄚ", '9': "ㄞ", '0': "ㄢ", '-': "ㄦ", 'q': "ㄆ", 'w': "ㄊ", 'e': "ㄍ", 'r': "ㄐ", 't': "ㄔ", 'y': "ㄗ", 'u': "ㄧ", 'i': "ㄛ", 'o': "ㄟ", 'p': "ㄣ", 'a': "ㄇ", 's': "ㄋ", 'd': "ㄎ", 'f': "ㄑ", 'g': "ㄕ", 'h': "ㄘ", 'j': "ㄨ", 'k': "ㄜ", 'l': "ㄠ", ';': "ㄤ", 'z': "ㄈ", 'x': "ㄌ", 'c': "ㄏ", 'v': "ㄒ", 'b': "ㄖ", 'n': "ㄙ", 'm': "ㄩ", ',': "ㄝ", '.': "ㄡ", '/': "ㄥ", ' ': "-"}
+
+var result = "";
+  for(i = 0; i<str.length; i++){
+      result += dict[str.slice(i,i+1)]
+  }
+console.log(result);
+return result
+}
+</script>
+
+
+</form>
+</body>
+</html>
