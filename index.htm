@@ -8,9 +8,9 @@
   <input type=button value="翻譯" onClick="this.form.text2.value = decode(this.form.text1.value)"><br>
   <input type=text name=text2 size=50> -->
 
-  <p>輸入： <input id="decode-input" type="text">
+  <p>輸入： <input id="decode-input" type="text" size=50>
   <input id="decode-submit" type="button" value="轉換" onClick="document.getElementById('decode-output').value = decode(document.getElementById('decode-input').value)"></p>
-  <p>輸出： <input id="decode-output" type="text"></p>
+  <p>輸出： <input id="decode-output" type="text" size=50></p>
 
 <script>
 function decode(str){
