@@ -1,7 +1,7 @@
 <html>
 <body>
 <h2>注音轉換機</h2>
-<h5>使用說明: 輸入欄輸入"vul3z/ "點轉換，輸出欄將出現轉換結果"ㄒㄧㄠˇㄈㄥ-"</h5>
+<h5>使用說明: 輸入欄輸入"vul3z/ "點轉換，輸出欄將出現轉換結果"ㄒㄧㄠˇㄈㄥˉ"</h5>
 <form id="decode">
 
     <!-- <input type=text name=text1 value="" size=50>
@@ -15,22 +15,27 @@
 
 <script>
 
-    dict = {'1': "ㄅ", '2': "ㄉ", '3': "ˇ", '4': "ˋ", '5': "ㄓ", '6': "ˊ", '7': "˙", '8':"ㄚ", '9': "ㄞ", '0': "ㄢ", '-': "ㄦ", 'q': "ㄆ", 'w': "ㄊ", 'e': "ㄍ", 'r': "ㄐ", 't': "ㄔ", 'y': "ㄗ", 'u': "ㄧ", 'i': "ㄛ", 'o': "ㄟ", 'p': "ㄣ", 'a': "ㄇ", 's': "ㄋ", 'd': "ㄎ", 'f': "ㄑ", 'g': "ㄕ", 'h': "ㄘ", 'j': "ㄨ", 'k': "ㄜ", 'l': "ㄠ", ';': "ㄤ", 'z': "ㄈ", 'x': "ㄌ", 'c': "ㄏ", 'v': "ㄒ", 'b': "ㄖ", 'n': "ㄙ", 'm': "ㄩ", ',': "ㄝ", '.': "ㄡ", '/': "ㄥ", ' ': "-"};
-    tone = ["ˇ","ˋ","ˊ","˙","-"]
+    dict = {'1': "ㄅ", '2': "ㄉ", '3': "ˇ", '4': "ˋ", '5': "ㄓ", '6': "ˊ", '7': "˙", '8':"ㄚ", '9': "ㄞ", '0': "ㄢ", '-': "ㄦ", 'q': "ㄆ", 'w': "ㄊ", 'e': "ㄍ", 'r': "ㄐ", 't': "ㄔ", 'y': "ㄗ", 'u': "ㄧ", 'i': "ㄛ", 'o': "ㄟ", 'p': "ㄣ", 'a': "ㄇ", 's': "ㄋ", 'd': "ㄎ", 'f': "ㄑ", 'g': "ㄕ", 'h': "ㄘ", 'j': "ㄨ", 'k': "ㄜ", 'l': "ㄠ", ';': "ㄤ", 'z': "ㄈ", 'x': "ㄌ", 'c': "ㄏ", 'v': "ㄒ", 'b': "ㄖ", 'n': "ㄙ", 'm': "ㄩ", ',': "ㄝ", '.': "ㄡ", '/': "ㄥ", ' ': "ˉ"};
+    tone = ["ˇ","ˋ","ˊ","˙","ˉ"]
 
 function decode(str){
 
     var result = "";
     for(i = 0; i<str.length; i++){
         char = str.slice(i,i+1).toLowerCase()
+        if((i>0) && (tone.includes(dict[str.slice(i-1,i).toLowerCase()])) && (tone.includes(dict[char]))){ //如果連續兩個聲調/空格，若是 則直接打印原文
+            result += str.slice(i,i+1)
+            continue
+        }
+        if((i>0) && (!dict.hasOwnProperty(str.slice(i-1,i).toLowerCase())) && (tone.includes(dict[char]))){ //如果前面的字元沒包括在字典且當前字元為聲調 則直接打印原文
+            result += str.slice(i,i+1)
+            continue
+        }
         if(!dict.hasOwnProperty(char)){ //判斷是否在字典內，若否 則直接打印原文
             result += str.slice(i,i+1)
             continue;
         }
-        if((i>0) && (tone.includes(dict[str.slice(i-1,i).toLowerCase()])) && (tone.includes(dict[char]))){ //判斷連續兩個聲調/空格，若是 則直接打印原文
-            result += str.slice(i,i+1)
-            continue
-        }
+
         result += dict[char];
     }
     return result;
