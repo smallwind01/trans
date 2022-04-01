@@ -1,17 +1,32 @@
 <html>
 <body>
-<h2>注音轉換機</h2>
-<h5>使用說明: 輸入欄輸入"vul3z/ "點轉換，輸出欄將出現轉換結果"ㄒㄧㄠˇㄈㄥˉ"</h5>
-<form id="decode">
+    
+    <h2>注音轉換機</h2>
+    <h5>使用說明: 輸入欄輸入"vul3z/ "點轉換，輸出欄將出現轉換結果"ㄒㄧㄠˇㄈㄥˉ"</h5>
+    <!-- <form id="decode"> -->
 
     <!-- <input type=text name=text1 value="" size=50>
     <input type=button value="翻譯" onClick="this.form.text2.value = decode(this.form.text1.value)"><br>
     <input type=text name=text2 size=50> -->
-
+    
     <p>輸入： <input id="decode-input" type="text" size=50>
-    <input id="decode-submit" type="button" value="轉換" onClick="document.getElementById('decode-output').value = decode(document.getElementById('decode-input').value)"></p>
+    <input type="button" id="decode-submit" value="轉換" onClick="document.getElementById('decode-output').value = decode(document.getElementById('decode-input').value)"></p>
     <!-- <p>輸出： <input id="decode-output" type="text" size=50></p> -->
     <label>輸出：</label><textarea id="decode-output" cols=50 rows=5></textarea>
+
+
+
+    <!-- BC base_conversion-->
+    <h2>進制轉換</h2>
+
+    <p><input id="BC_base-input" type="text" size=1 value="2">進制 轉<input id="BC_baseto-input" type="text" size=1 value="16">進制
+    <input type="button" id="BC-submit" value="轉換" 
+    onClick="document.getElementById('BC-output').value = 
+    base_conversion(document.getElementById('BC_base-input').value,document.getElementById('BC_number-input').value,document.getElementById('BC_baseto-input').value)"></p>
+    <p>輸入： <input id="BC_number-input" type="text" size=50>
+    <p>輸出： <input id="BC-output" type="text" size=50></p>
+
+
 
 <script>
 
@@ -40,9 +55,16 @@ function decode(str){
     }
     return result;
 }
+function base_conversion(base,number,baseto){
+    if (!parseInt(number)||!parseInt(base)||!parseInt(baseto)){
+        return "請輸入整數"
+    }
+    var result = parseInt(number, base).toString(baseto).toUpperCase();
+    return result
+}
 </script>
 
 
-</form>
+<!-- </form> -->
 </body>
 </html>
