@@ -56,10 +56,13 @@ function decode(str){
     return result;
 }
 function base_conversion(base,number,baseto){
-    if (!parseInt(number)||!parseInt(base)||!parseInt(baseto)){
-        return "請輸入整數"
-    }
+    // if (!parseInt(number)||!parseInt(base)||!parseInt(baseto)){
+    //     return "請輸入整數"
+    // }
     var result = parseInt(number, base).toString(baseto).toUpperCase();
+    if(!result||isNaN(result)){
+        return "輸入有誤"
+    }
     return result
 }
 </script>
