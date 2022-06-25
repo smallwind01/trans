@@ -1,30 +1,28 @@
 <html>
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+</head>
+<!-- <body style = "background: url(./1.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;"> -->
 <body>
 <!-- <form> -->
-    <h2>注音轉換機</h2>
+    <h2>注音轉換</h2>
     <h5>使用說明: 輸入欄輸入"vul3z/ "點轉換，輸出欄將出現轉換結果"ㄒㄧㄠˇㄈㄥˉ"</h5>
     <!-- <form id="decode"> -->
-
-    <!-- <input type=text name=text1 value="" size=50>
-    <input type=button value="翻譯" onClick="this.form.text2.value = decode(this.form.text1.value)"><br>
-    <input type=text name=text2 size=50> -->
     
-    <p>輸入： <input id="decode-input" type="text" size=50>
-    <input type="button" id="decode-submit" value="轉換" onClick="document.getElementById('decode-output').value = decode(document.getElementById('decode-input').value)"></p>
+    <p>輸入： <input id="decode-input" class = 'input1' type="text" size=50>
+    <input type="button" id="decode-submit" class="button1" value="轉換"></p>
     <!-- <p>輸出： <input id="decode-output" type="text" size=50></p> -->
-    <label>輸出：</label><textarea id="decode-output" cols=50 rows=5></textarea>
-
-
+    <label>輸出：</label><textarea id="decode-output" class = 'input1' cols=50 rows=5></textarea>
 
     <!-- BC base_conversion-->
     <h2>進制轉換</h2>
 
-    <p><input id="BC_base-input" type="text" size=1 value="2">進制 轉<input id="BC_baseto-input" type="text" size=1 value="16">進制
-    <input type="button" id="BC-submit" value="轉換" 
-    onClick="document.getElementById('BC-output').value = 
-    base_conversion(document.getElementById('BC_base-input').value,document.getElementById('BC_number-input').value,document.getElementById('BC_baseto-input').value)"></p>
-    <p>輸入： <input id="BC_number-input" type="text" size=50>
-    <p>輸出： <input id="BC-output" type="text" size=50></p>
+    <p><input id="BC_base-input" class = 'input1' type="text" size=1 value="2">進制 轉<input id="BC_baseto-input" class = 'input1' type="text" size=1 value="16">進制
+    <input type="button" id="BC-submit" class = "button1" value="轉換"></p>
+    <p>輸入： <input id="BC_number-input" class = 'input1' type="text" size=50></p>
+    <p>輸出： <input id="BC-output" class = 'input1' type="text" size=50></p>
 
 
 
@@ -32,42 +30,129 @@
 
     dict = {'1': "ㄅ", '2': "ㄉ", '3': "ˇ", '4': "ˋ", '5': "ㄓ", '6': "ˊ", '7': "˙", '8':"ㄚ", '9': "ㄞ", '0': "ㄢ", '-': "ㄦ", 'q': "ㄆ", 'w': "ㄊ", 'e': "ㄍ", 'r': "ㄐ", 't': "ㄔ", 'y': "ㄗ", 'u': "ㄧ", 'i': "ㄛ", 'o': "ㄟ", 'p': "ㄣ", 'a': "ㄇ", 's': "ㄋ", 'd': "ㄎ", 'f': "ㄑ", 'g': "ㄕ", 'h': "ㄘ", 'j': "ㄨ", 'k': "ㄜ", 'l': "ㄠ", ';': "ㄤ", 'z': "ㄈ", 'x': "ㄌ", 'c': "ㄏ", 'v': "ㄒ", 'b': "ㄖ", 'n': "ㄙ", 'm': "ㄩ", ',': "ㄝ", '.': "ㄡ", '/': "ㄥ", ' ': "ˉ"};
     tone = ["ˇ","ˋ","ˊ","˙","ˉ"]
+    
+    $(document).ready(function(){
+        $("#decode-submit").click(function(){
+            var input = $("#decode-input").val()
+            var output = decode(input)
+            $("decode-output").val(output)
+        });
+    });
+    function decode(str){
 
-function decode(str){
+        var result = "";
+        for(i = 0; i<str.length; i++){
+            char = str.slice(i,i+1).toLowerCase()
+            if((i>0) && (tone.includes(dict[str.slice(i-1,i).toLowerCase()])) && (tone.includes(dict[char]))){ //如果連續兩個聲調/空格，若是 則直接打印原文
+                result += str.slice(i,i+1)
+                continue
+            }
+            if((i>0) && (!dict.hasOwnProperty(str.slice(i-1,i).toLowerCase())) && (tone.includes(dict[char]))){ //如果前面的字元沒包括在字典且當前字元為聲調 則直接打印原文
+                result += str.slice(i,i+1)
+                continue
+            }
+            if(!dict.hasOwnProperty(char)){ //判斷是否在字典內，若否 則直接打印原文
+                result += str.slice(i,i+1)
+                continue;
+            }
 
-    var result = "";
-    for(i = 0; i<str.length; i++){
-        char = str.slice(i,i+1).toLowerCase()
-        if((i>0) && (tone.includes(dict[str.slice(i-1,i).toLowerCase()])) && (tone.includes(dict[char]))){ //如果連續兩個聲調/空格，若是 則直接打印原文
-            result += str.slice(i,i+1)
-            continue
+            result += dict[char];
         }
-        if((i>0) && (!dict.hasOwnProperty(str.slice(i-1,i).toLowerCase())) && (tone.includes(dict[char]))){ //如果前面的字元沒包括在字典且當前字元為聲調 則直接打印原文
-            result += str.slice(i,i+1)
-            continue
-        }
-        if(!dict.hasOwnProperty(char)){ //判斷是否在字典內，若否 則直接打印原文
-            result += str.slice(i,i+1)
-            continue;
-        }
-
-        result += dict[char];
+        return result;
     }
-    return result;
-}
-function base_conversion(base,number,baseto){
-    // if (!parseInt(number)||!parseInt(base)||!parseInt(baseto)){
-    //     return "請輸入整數"
+    // <!-- BC base_conversion-->
+    $(document).ready(function(){
+        $("#BC-submit").click(function(){
+            var base = $("#BC_base-input").val()
+            var number = $("#BC_number-input").val()
+            var baseto = $("#BC_baseto-input").val()
+            var output = base_conversion(base,number,baseto)
+            $("#BC-output").val(output)
+        });
+    });
+
+    function base_conversion(base,number,baseto){
+        base = parseInt(base)
+        baseto = parseInt(baseto)
+        
+        if(!number||!base||!baseto){return} //未輸入則不做任何事
+        if(baseto<2||baseto>36){return "基底請設置在2到36之間"} //未在合理基底
+        var result = parseInt(number, base).toString(baseto).toUpperCase()
+        if(result == 'NAN'){return "輸入有誤"}
+        return result
+    }   
+
+    // function sizeToString(a, e) {
+    //     if (a == 0)
+    //         return "empty";
+    //     var t = 1024
+    //       , n = e || 2
+    //       , i = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+    //       , r = Math.floor(Math.log(a) / Math.log(t));
+    //     return parseFloat((a / Math.pow(t, r)).toFixed(n)) + i[r]
     // }
-    var result = parseInt(number, base).toString(baseto).toUpperCase();
-    if(!result||isNaN(result)){
-        return "輸入有誤"
+    function sizeToString(size, toFixed) {
+        if (size == 0)
+            return "empty";
+        var t = 1024
+        var n = toFixed || 2
+        var unit = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        var r = Math.floor(Math.log(size) / Math.log(t));
+        return parseFloat((size / Math.pow(t, r)).toFixed(n)) + unit[r]
     }
-    return result
-}
+
+
+
+
 </script>
 
+<style type = "text/css" >
+    .button{
+    border:0;
+    background-color:#ffffff;
+    color:#000000;
+    border-radius:5px;
+    border:2px #5fed9c solid;
+    cursor:pointer;
+    }
 
+    .button:hover{
+    /* color:#5fed9c; */
+    background-color:#5fed9c;
+    border:2px #5fed9c solid;}
+    .button:active{
+        background: #45e68b;
+    }
+
+    /* button1 */
+    .button1{border:0;
+    background-color:#5fed9c;
+    color:#000000;
+    border-radius:5px;
+    border:2px #5fed9c solid;
+    cursor:pointer;
+    }
+
+    .button1:hover{
+    background-color:#45e68b;
+    border:2px #45e68b solid;}
+    .button1:active{
+        background: #1de072;
+    }
+</style>
+<style type = "text/css" >
+    .input1{
+    border:0;
+    border-radius:5px;
+    border:1px solid;
+    }
+    /* .input:hover{
+    background-color:#bed5ed;
+    border:1px solid;} */
+    /* .input:active{
+        background: #45e68b;
+    } */
+</style>
 <!-- </form> -->
 </body>
 </html>
