@@ -1,6 +1,6 @@
 dict = {'1': "ㄅ", '2': "ㄉ", '3': "ˇ", '4': "ˋ", '5': "ㄓ", '6': "ˊ", '7': "˙", '8':"ㄚ", '9': "ㄞ", '0': "ㄢ", '-': "ㄦ", 'q': "ㄆ", 'w': "ㄊ", 'e': "ㄍ", 'r': "ㄐ", 't': "ㄔ", 'y': "ㄗ", 'u': "ㄧ", 'i': "ㄛ", 'o': "ㄟ", 'p': "ㄣ", 'a': "ㄇ", 's': "ㄋ", 'd': "ㄎ", 'f': "ㄑ", 'g': "ㄕ", 'h': "ㄘ", 'j': "ㄨ", 'k': "ㄜ", 'l': "ㄠ", ';': "ㄤ", 'z': "ㄈ", 'x': "ㄌ", 'c': "ㄏ", 'v': "ㄒ", 'b': "ㄖ", 'n': "ㄙ", 'm': "ㄩ", ',': "ㄝ", '.': "ㄡ", '/': "ㄥ", ' ': "ˉ"};
 tone = ["ˇ","ˋ","ˊ","˙","ˉ"]
-// onClick="document.getElementById('decode-output').value = decode(document.getElementById('decode-input').value)"
+
 $(document).ready(function () {
   $("#decode-submit").click(function () {
     var input = $("#decode-input").val();
@@ -40,6 +40,7 @@ function decode(str) {
   }
   return result;
 }
+
 // <!-- BC base_conversion-->
 $(document).ready(function () {
   $("#BC-submit").click(function () {
@@ -94,24 +95,6 @@ function sizeToString(size, toFixed) {
   var r = Math.floor(Math.log(size) / Math.log(t));
   return parseFloat((size / Math.pow(t, r)).toFixed(n)) + unit[r];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // function sizeToString(a, e) {
 //     if (a == 0)
