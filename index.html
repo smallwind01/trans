@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel=stylesheet type="text/css" href="css/main.css">
+    <link rel=stylesheet type="text/css" href="css/trans.css">
+    <link rel="icon" href="img/01202193.img.info.iconRaw.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script language="javascript" src="src/main.js"></script>
+    <script language="javascript" src="src/trans.js"></script>
+</head>
+<body class="background">
+    <div class="div-bg">
+        <header>
+            <div><h1>實用小工具</h1></div>
+            <nav>
+                <ul class="nav-buttons">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="#phonetic_conversion">注音轉換</a></li>
+                  <li><a href="#base_conversion">進制轉換</a></li>
+                  <li><a href="#size_conversion">儲存容量單位轉換</a></li>
+                </ul>
+              </nav>
+        </header>
+
+        <div>
+            <!-- Bopomofo(Mandarin Phonetic Symbols) conversion-->
+            <h2 id="phonetic_conversion">注音轉換</h2>
+            <h5>使用說明: 輸入欄輸入"vul3z/ "點轉換，輸出欄將出現轉換結果"ㄒㄧㄠˇㄈㄥˉ"</h5>
+            <p>輸入： <input id="decode-input" class = 'input1' type="text" size=50>
+            <input type="button" id="decode-submit" class="trans_button" value="轉換"></p>
+            <label>輸出：</label><textarea id="decode-output" class = 'input1' cols=50 rows=5></textarea>
+        </div>
+        <div>
+            <!-- BC base_conversion-->
+            <h2 id="base_conversion">進制轉換</h2>
+            <p><input id="BC-base-input" class = 'input1' type="text" size=1 value="2">進制 轉<input id="BC-baseto-input" class = 'input1' type="text" size=1 value="16">進制
+            <input type="button" id="BC-submit" class = "trans_button" value="轉換"></p>
+            <p>輸入： <input id="BC-number-input" class = 'input1' type="text" size=50></p>
+            <p>輸出： <input id="BC-output" class = 'input1' type="text" size=50></p>
+        </div>
+        <div>
+            <!-- size_conversion-->
+            <h2 id="size_conversion">儲存容量單位轉換</h2>
+            <p>輸入：<input id="size-input" class = 'input1' type="text" size=50 value="1" placeholder=""> 
+                <select id='size-input-unit'>
+                    <option value=0>B</option>
+                    <option value=1 selected>KB</option>
+                    <option value=2>MB</option>
+                    <option value=3>GB</option>
+                    <option value=4>TB</option>
+                    <option value=5>PB</option>
+                    <option value=6>EB</option>
+                    <option value=7>ZB</option>
+                    <option value=8>YB</option>
+                </select>     
+            </p>
+            <p>輸出：<input id="size-output" class = 'input1' type="text" size=50>
+                <select id='size-output-unit'>
+                    <option value=0 selected>B</option>
+                    <option value=1>KB</option>
+                    <option value=2>MB</option>
+                    <option value=3>GB</option>
+                    <option value=4>TB</option>
+                    <option value=5>PB</option>
+                    <option value=6>EB</option>
+                    <option value=7>ZB</option>
+                    <option value=8>YB</option>
+                </select>
+            <input type="button" id="size-submit" class = "trans_button" value="轉換">
+            </p>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <p>Copyright © 2025 aoi777.com - All Rights Reserved.</p>
+        </footer>
+        <!-- <audio class="bgm" src="TheTuneOfAzureLight2.mp3" controls="" loop="true"></audio> -->
+    </div>
+</body>
+</html>
+
